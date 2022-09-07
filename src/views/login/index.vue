@@ -99,7 +99,7 @@ export default {
         // console.log(data)
         this.SET_TOKEN(data.data)
         // 跳转路由
-        this.router.push('/profile')
+        this.$router.push('/profile')
         // 成功的提示
         this.$toast.success('登录成功')
       } catch (error) {
