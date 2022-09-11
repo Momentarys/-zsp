@@ -12,7 +12,9 @@ const request = axios.create({
   timeout: 5000,
   baseURL: 'http://toutiao.itheima.net'
 })
-
+// 请求拦截器：请求做些事情
+// config是每一次请求的配置对象
+// 每次成功是发送的请求
 request.interceptors.request.use(
   function (config) {
     const {
