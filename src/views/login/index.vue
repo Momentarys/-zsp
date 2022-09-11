@@ -8,6 +8,7 @@
     <!-- -name:表示表单项 -->
     <!-- -ru1es是一个数组 -->
     <!-- -rule:{required:是否必选，message:错误的提示信息，pattern:正则，trigger:规则的触发时机onChange、onBlur -->
+    <!-- fo表单 -->
     <van-form ref="form" @submit="onSubmit" class="form">
       <!-- 手机号 -->
       <van-field
@@ -72,6 +73,9 @@ export default {
       codeRules,
       isShowCodeBtn: true
     }
+  },
+  created() {
+    console.log(this)
   },
   methods: {
     ...mapMutations(['SET_TOKEN']),
