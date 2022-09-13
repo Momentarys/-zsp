@@ -114,7 +114,7 @@ export default {
     ...mapGetters(['isLogin'])
   },
   methods: {
-    // 组件 属性
+    // 组件 属性  点击退出提示
     async logout() {
       await this.$dialog.confirm({
         title: '黑马头条',

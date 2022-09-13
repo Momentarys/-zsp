@@ -12,20 +12,43 @@
       <van-tab v-for="item in channels" :key="item.id" :title="item.name">
         <article-list :id="item.id"></article-list>
       </van-tab>
-      <span class="toutiao toutiao-gengduo"></span>
+      <span class="toutiao toutiao-gengduo" @click="isShow = true"></span>
     </van-tabs>
+    <!-- 弹出层 -->
+    <!-- closeable退出按钮X   退出按钮的位置 close-icon-position="top-left"-->
+    <van-popup
+      close-icon-position="top-left"
+      closeable
+      v-model="isShow"
+      position="bottom"
+      :style="{ height: '100%' }"
+    >
+      <!-- 使用子组件 -->
+      <channel-edit
+        @change-active=";[(isShow = false), (active = $event)]"
+        :myChannels="channels"
+      ></channel-edit>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import { getChannelAPI } from '@/api'
 import ArticleList from './components/ArticleList.vue'
+// 子组件引入
+import ChannelEdit from './components/ChannelEdit.vue'
 export default {
-  components: { ArticleList },
+  components: { ArticleList, ChannelEdit },
   data() {
     return {
+      // 高亮
       active: 0,
-      channels: []
+      // 创建数组 接收频道导航接口
+      channels: [],
+      // 弹出框false不触发
+      isShow: false,
+      // 子组件引入
+      ChannelEdit
     }
   },
   created() {
