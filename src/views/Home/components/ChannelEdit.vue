@@ -33,6 +33,7 @@
     <!-- 标题 -->
     <van-cell title="推荐频道"> </van-cell>
     <!-- 频道 -->
+    <!-- 父传子 -->
     <div class="recommend-pannel">
       <van-grid gutter="10" :border="false">
         <van-grid-item
@@ -40,6 +41,7 @@
           :key="item.id"
           :text="item.name"
           icon="plus"
+          @click="$emit('add-channel', item)"
         />
       </van-grid>
     </div>
@@ -50,6 +52,7 @@
 import { getAllChannelsAPI } from '@/api'
 export default {
   props: {
+    // 父传子 :号传入 数据
     myChannels: Array
   },
   data() {
@@ -71,9 +74,12 @@ export default {
       this.allChannels = data.data.channels
     },
     // 上面添加index 传入父级
-    handleMyChannel({ name }, index) {
+    // 函数传入形参接收
+    handleMyChannel({ name, id }, index) {
       if (this.isEdit && name !== '推荐') {
         console.log('删除频道', name)
+        console.log(id)
+        this.$emit('del-channel', id)
       } else {
         // 1.关闭弹窗
         // 2.切换频道

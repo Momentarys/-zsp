@@ -21,12 +21,14 @@ export default new Vuex.Store({
   plugins: [createPersistedstate({
     key: 'HEIMA_TOUTIAO',
     // storage: window.sessionStorage
-    reducer({ tokenObj }) {
-      return { tokenObj }
+    reducer({ tokenObj, myChannels }) {
+      return { tokenObj, myChannels }
     }
   })],
   state: {
-    tokenObj: {}
+    tokenObj: {},
+    // 把函数渲染最新的数据传进来
+    myChannels: []
   },
   getters: {
     isLogin(state) {
@@ -37,6 +39,13 @@ export default new Vuex.Store({
     SET_TOKEN(state, token) {
       // 将token 存在vuex
       state.tokenObj = token
+    },
+    /**
+     * @param {Array} channels  删除或添加后的最新的channels
+     */
+    // 调用函数 传入数据
+    SET_MY_CHANNELS(state, channels) {
+      state.myChannels = channels
     }
   },
   actions: {
