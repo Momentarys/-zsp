@@ -3,10 +3,12 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 // /SPA
 // 首屏加载速度很慢
-// 1路由懒加载
+// 路由懒加载
 // ·使用到了路由页面，再去请求他
 
-/* webpackChunkName: "base" */
+// 懒加载的chunk默认的名字是模块的路径
+// /*webpackChunkName:"新名字"*/
+// webpack魔法注释：/*webpackChunkName:"新名字" */
 const routes = [
   // 一级路由
   {
@@ -14,7 +16,7 @@ const routes = [
     component: () => import('@/views/layout'),
     redirect: '/ ',
     children: [
-      // 二级路由
+      // 二级路由 页面四大模块
       {
         path: '/ ',
         component: () => import('@/views/Home')
@@ -33,9 +35,15 @@ const routes = [
       }
     ]
   },
+  // 登录路由
   {
     path: '/login',
     component: () => import('@/views/login')
+  },
+  // 搜索路由
+  {
+    path: '/search',
+    component: () => import('@/views/Search')
   }
 ]
 
